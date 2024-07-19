@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Ordinateurs</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function prefixNom() {
+            const nomInput = document.getElementById('nom');
+            const prefix = 'SN3644';
+            // Préfixer le nom avec 'SN3644'
+            if (nomInput.value && !nomInput.value.startsWith(prefix)) {
+                nomInput.value = prefix + nomInput.value;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', prefixNom);
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="cfao logo2.png" alt="Logo CFAO" class="logo">
+        <h1>Formulaire d'Inventaire</h1>
+        <a href="login.html" class="close">&times;</a>
+    </header>
+    <div class="container">
+        <form action="insert.php" method="post">
+            <label for="nom">Nom de l'ordinateur (partie après SN3644) :</label>
+            <input type="text" id="nom" name="nom" required><br><br>
+            
+            <label for="utilisateur">Nom de l'utilisateur :</label>
+            <input type="text" id="utilisateur" name="utilisateur" required><br><br>
+
+            <label for="localisation">Localisation :</label>
+            <select id="localisation" name="localisation" required>
+                <option value="ACHAT">ACHAT</option>
+                <option value="COMPTABILITE">COMPTABILITE</option>
+                <option value="DIRECTION">DIRECTION</option>
+                <option value="EXPANSION">EXPANSION</option>
+                <option value="FINANCE">FINANCE</option>
+                <option value="RH">RH</option>
+                <option value="INFORMATIQUE">INFORMATIQUE</option>
+                <option value="JURISTE">JURISTE</option>
+                <option value="MAINTENANCE">MAINTENANCE</option>
+                <option value="MARKETING&COM">MARKETING&COM</option>
+                <option value="REFERENTIEL">REFERENTIEL</option>
+                <option value="SECURITE&QUALITE">SECURITE&QUALITE</option>
+                <option value="SUPPLY">SUPPLY</option>
+                <option value="TRANSIT">TRANSIT</option>
+                <option value="TRESORERIE">TRESORERIE</option>
+            </select><br><br>
+            
+            <label for="statut">Statut :</label>
+            <select id="statut" name="statut" required>
+                <option value="fonctionne">Fonctionne</option>
+                <option value="ne fonctionne pas">Ne fonctionne pas</option>
+            </select><br><br>
+            
+            <input type="submit" value="Soumettre">
+        </form>
+    </div>
+</body>
+</html>

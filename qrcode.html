@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de QR Code</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="cfao logo2.png" alt="Logo CFAO" class="logo">
+        <h1>Générateur de QR Code</h1>
+        <a href="login.html" class="close">&times;</a>
+    </header>
+    <div class="container">
+        <form id="qrForm">
+
+            <label for="nomMachine">Nom de l'ordinateur (partie après SN3644) :</label>
+            <input type="text" id="nomMachine" name="nomMachine" required><br><br>
+
+            <label for="nom">Nom de l'utilisateur:</label>
+            <input type="text" id="nom" name="nom" required><br><br>
+            
+            <label for="localisation">Localisation :</label>
+            <select id="localisation" name="localisation" required>
+                <option value="ACHAT">ACHAT</option>
+                <option value="COMPTABILITE">COMPTABILITE</option>
+                <option value="DIRECTION">DIRECTION</option>
+                <option value="EXPANSION">EXPANSION</option>
+                <option value="FINANCE">FINANCE</option>
+                <option value="RH">RH</option>
+                <option value="INFORMATIQUE">INFORMATIQUE</option>
+                <option value="JURISTE">JURISTE</option>
+                <option value="MAINTENANCE">MAINTENANCE</option>
+                <option value="MARKETING&COM">MARKETING&COM</option>
+                <option value="REFERENTIEL">REFERENTIEL</option>
+                <option value="SECURITE&QUALITE">SECURITE&QUALITE</option>
+                <option value="SUPPLY">SUPPLY</option>
+                <option value="TRANSIT">TRANSIT</option>
+                <option value="TRESORERIE">TRESORERIE</option>
+            </select><br><br>
+            
+            <label for="statut">Statut :</label>
+            <select id="statut" name="statut" required>
+                <option value="fonctionne">Fonctionne</option>
+                <option value="ne fonctionne pas">Ne fonctionne pas</option>
+            </select><br><br>
+            
+            <input type="submit" value="Générer QR Code">
+        </form>
+        <canvas id="canvas" width="800" height="800" style="display: none;"></canvas>
+        <button id="downloadBtn" style="display: none;">Télécharger le QR Code</button>
+    </div>
+    <script src="qrcode.min.js"></script>
+    <script>
+        document.getElementById('qrForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nom = document.getElementById('nom').value;
+            const nomMachine = document.getElementById('nomMachine').value;
+            const localisation = document.getElementById('localisation').value;
+            const statut = document.getElementById('statut').value;
+
+            // Ajouter le préfixe SN3644 au nom de l'ordinateur
+            const prefixedNomMachine = 'SN3644' + nomMachine;
+
+            const data = `${prefixedNomMachine} - ${nom} -  ${localisation} - ${statut}`;
+
+            generateQRCode(data, prefixedNomMachine);
+        });
+
+        function generateQRCode(data, prefixedNomMachine) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const qrcodeContainer = document.createElement('div');
+            
+            const qrcode = new QRCode(qrcodeContainer, {
+                text: data,
+                width: 500,
+                height: 500
+            });
+
+            const qrImage = qrcodeContainer.querySelector('img');
+            qrImage.onload = function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Load background image
+                const background = new Image();
+                background.src = 'LPT106.png';
+                background.onload = function() {
+                    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+                    
+                    // Draw QR code
+                    const qrSize = 500;
+                    const qrX = (canvas.width - qrSize) / 2;
+                    const qrY = (canvas.height - qrSize) / 2;
+                    ctx.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
+                    
+                    // Show download button and set its onclick event
+                    const downloadBtn = document.getElementById('downloadBtn');
+                    downloadBtn.style.display = 'block';
+                    downloadBtn.onclick = function() {
+                        const link = document.createElement('a');
+                        link.download = `CFAO_QR_Code_${prefixedNomMachine}`;
+                        link.href = canvas.toDataURL();
+                        link.click();
+                    };
+                };
+            };
+        }
+    </script>
+</body>
+</html>

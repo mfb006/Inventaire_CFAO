@@ -1,0 +1,254 @@
+ /* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #1e3c72, #2a5298); /* Bleu nuit dynamique */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+}
+
+/* Header styles */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #FFA500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Assure que le header reste au-dessus des autres éléments */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between; /* Espace entre le logo et le titre */
+}
+
+.logo {
+    height: 50px;
+    margin-left: 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.close {
+    margin-right: 20px;
+    text-decoration: none;
+    font-size: 2rem;
+    color: white;
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Container styles for index.html */
+.container {
+    text-align: center;
+    background-color: rgba(255, 165, 0, 0.1); /* Fond blanc orangé léger */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 100px; /* Ajoute de l'espace entre le header et le contenu */
+    width: 80%; /* Augmenter la largeur du conteneur */
+}
+
+button {
+    background-color: #FFA500; /* Orange */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    border-radius: 12px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #FFA500;
+}
+
+/* Form and database table styles */
+form, .container table {
+    background-color: rgb(230, 221, 221);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgb(226, 221, 221);
+    color: black; /* Couleur du texte en noir pour une meilleure lisibilité */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label, input, select {
+    margin: 10px;
+}
+
+table {
+    width: 100%; /* Augmenter la largeur du tableau */
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #000000;
+}
+
+tr:hover {
+    background-color: rgb(240, 131, 6);
+}
+
+.record-count {
+    margin-top: 270px; /* Reduced margin to bring the content closer */
+    font-size: 20px;
+    font-weight: bold;
+    color: #ecf0f1;
+    margin-bottom: -60px;
+}
+
+
+/* Styles pour les boutons d'action */
+.delete-btn, .edit-btn {
+    border: none;
+    color: white;
+    padding: 3px 7px; /* Réduire la taille du padding pour un bouton plus petit */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px; /* Réduire la taille de la police */
+    margin: 2px; /* Réduire l'espacement autour du bouton */
+    cursor: pointer;
+    border-radius: 50%; /* Forme circulaire */
+    width: 25px; /* Largeur fixe */
+    height: 25px; /* Hauteur fixe */
+    line-height: 25px; /* Alignement vertical du texte */
+}
+
+/* Style spécifique pour le bouton de suppression */
+.delete-btn {
+    background-color: #FF0000; 
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #FF7F7F; 
+}
+
+/* Style spécifique pour le bouton d'édition */
+.edit-btn {
+    background-color: #4CAF50; 
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #45a049; 
+}
+
+/* Formulaire d'édition */
+#editFormContainer {
+    background-color: rgba(255, 255, 255, 0.9); /* Fond blanc translucide */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001; /* Au-dessus du header */
+}
+
+/* Ajout d'une transition pour les boutons */
+button, .delete-btn, .edit-btn {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    .close {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+.next, .prev {
+    background-color: #FFA500; /* Orange */
+    color: white; /* Écriture blanche */
+    border: none; /* Pas de bordure */
+    padding: 10px 20px; /* Padding pour donner de l'espace autour du texte */
+    text-align: center; /* Centrer le texte */
+    text-decoration: none; /* Pas de soulignement du texte */
+    display: inline-block; /* Permet de définir les dimensions du bouton */
+    font-size: 16px; /* Taille de la police */
+    margin: 10px 2px; /* Marges autour du bouton */
+    cursor: pointer; /* Curseur en forme de pointeur */
+    border-radius: 12px; /* Bords arrondis */
+    transition-duration: 0.4s; /* Animation de transition */
+}
+
+.next:hover, .prev:hover {
+    background-color: white; /* Fond blanc au survol */
+    color: black; /* Texte noir au survol */
+    border: 2px solid #FFA500; /* Bordure orange au survol */
+}
+
+
+.search-bar {
+    margin: 420px 54px -221px; /* Augmenter la marge bottom pour plus de descente */
+    text-align: center;
+}
+
+.search-bar form {
+    display: inline-block;
+    margin-top: 10px; /* Ajouter un peu d'espace au-dessus du formulaire */
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    width: 300px; /* Conserver la même largeur */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #ffa600b4;
+}
+
